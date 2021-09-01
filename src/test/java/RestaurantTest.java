@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,4 +79,21 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	// Below Test Cases will fail
+	@Test
+	public void passing_valid_item_names_will_return_actual_order_value() throws itemNotFoundException {
+		List<String> itemNames = new ArrayList<String>();
+		int actualCost = restaurant.calculateOrderValue(itemNames);
+		assertEquals(300, actualCost);
+
+	}
+
+	// Below Test Cases will fail
+	@Test
+	public void passing_invalid_item_names_should_throw_exception() throws itemNotFoundException {
+		List<String> itemNames = new ArrayList<String>();
+		assertThrows(itemNotFoundException.class, () -> {
+			restaurant.calculateOrderValue(itemNames);
+		});
+	}
 }
